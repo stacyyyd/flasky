@@ -26,7 +26,9 @@ def create_app(test_config = None):
     if not test_config:
         # development environment configuration
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("SQLALCHEMY_DATABASE_URI")
+        #app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("SQLALCHEMY_DATABASE_URI")
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("RENDER_DATABASE_URI")
+
     else:
         # test environment configuration
         # if there is a test_config passed in, this means
@@ -36,6 +38,7 @@ def create_app(test_config = None):
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("SQLALCHEMY_TEST_DATABASE_URI")
+        
 
     # connect the db and migrate to our flask app
     db.init_app(app)
